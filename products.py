@@ -20,7 +20,7 @@ options.add_argument("--disable-extensions")
 options.add_argument("--profile-directory=Default")
 options.add_argument("--incognito")
 options.add_argument("--start-maximized")
-driver = uc.Chrome(options=options)
+driver = uc.Chrome(options=options,version_main=120)
 
 all_products = []
 
@@ -29,7 +29,7 @@ driver.get("https://www.costco.com/s?keyword=OFF&currentPage=1")
 last_page = 1
 try:
     # Wait until all pagination buttons/links are loaded
-    pagination_buttons = WebDriverWait(driver, 60).until(
+    pagination_buttons = WebDriverWait(driver, 30).until(
         EC.presence_of_all_elements_located(
             (By.CSS_SELECTOR, "ul.MuiPagination-ul li button, ul.MuiPagination-ul li a")
         )
@@ -60,15 +60,15 @@ for page in range(1, last_page + 1):
         print(f"\n🔄 Scraping page {page} (Attempt {attempt}/3)...")
         driver.get(url)
         try:
-            top_deals_section = WebDriverWait(driver, 60).until(
+            top_deals_section = WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "ul.MuiPagination-ul li button"))
             )
 
             # Extract product <a> elements with product hrefs
-            best_deals_section = WebDriverWait(driver, 60).until(
+            best_deals_section = WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "div[id*='productList']"))
             )
-            time.sleep(random.uniform(5, 9))
+            time.sleep(random.uniform(1, 3))
             product_elements = best_deals_section.find_elements(By.CSS_SELECTOR, "a[data-testid='Link'][href*='product']")
             # best_deals_section = driver.find_element(By.CSS_SELECTOR, "div[id*='productList']")
             # product_elements = best_deals_section.find_elements(By.CSS_SELECTOR, "a[data-testid='Link'][href*='product']")
@@ -103,3 +103,4 @@ with open("products.txt", "w", encoding="utf-8") as f:
 driver.quit()
 
 print("📁 Saved to 'products2.csv' and 'products.txt'")
+
