@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gnupg \
     xvfb \
     chromium \
-    chromium-driver \
     libnss3 \
     libgconf-2-4 \
     libxss1 \
