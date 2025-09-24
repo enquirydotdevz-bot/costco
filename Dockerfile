@@ -47,4 +47,4 @@ ENV DB_PORT=5432
 # ============================
 # Step 8: Start FastAPI server
 # ============================
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "api_copy:app", "--host", "0.0.0.0", "--port", "8000"]
