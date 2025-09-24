@@ -1,0 +1,19 @@
+# Web framework
+fastapi==0.111.1
+uvicorn[standard]==0.23.2
+
+# Database
+psycopg2-binary==2.9.9
+
+# Data processing
+pandas==2.1.1
+numpy==1.26.0
+
+# Scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+selenium==4.14.0
+
+# Optional utilities
+python-dotenv==1.0.0   # For environment variable management
