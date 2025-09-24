@@ -10,7 +10,7 @@ import random
 
 # Setup undetected Chrome
 options = uc.ChromeOptions()
-# options.add_argument("--headless")  # Set False to see the browser
+options.add_argument("--headless")  # Set False to see the browser
 options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36")
 options.add_argument("--disable-blink-features=AutomationControlled")
 options.add_argument("--no-sandbox")
@@ -101,4 +101,5 @@ with open("products.txt", "w", encoding="utf-8") as f:
         f.write(f"{p['Title']}\n{p['URL']}\n\n")
 
 driver.quit()
+
 print("📁 Saved to 'products2.csv' and 'products.txt'")
