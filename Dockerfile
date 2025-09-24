@@ -14,13 +14,24 @@ WORKDIR /app
 COPY . /app
 
 # ============================
-# Step 4: Install system dependencies
+# Step 4: Install system dependencies + Chromium for Selenium
 # ============================
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
     curl \
+    wget \
+    unzip \
+    gnupg \
+    xvfb \
+    chromium \
+    chromium-driver \
+    libnss3 \
+    libgconf-2-4 \
+    libxss1 \
+    libappindicator3-1 \
+    fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
 # ============================
@@ -30,19 +41,20 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ============================
-# Step 6: Expose port
+# Step 6: Set environment variables for DB and Chrome
 # ============================
-EXPOSE 8000
-
-# ============================
-# Step 7: Set environment variables (optional)
-# ============================
-# You can override these in Render environment
 ENV DB_NAME=costco_db
 ENV DB_USER=postgres
 ENV DB_PASSWORD=yourpassword
 ENV DB_HOST=localhost
 ENV DB_PORT=5432
+ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_PATH=/usr/bin/chromium
+
+# ============================
+# Step 7: Expose port
+# ============================
+EXPOSE 8000
 
 # ============================
 # Step 8: Start FastAPI server
