@@ -19,13 +19,16 @@ CSV_FILE = "products2.csv"
 DETAILS_FILE = "product_details2.csv"
 
 # PostgreSQL connection config
+import os
+
 DB_CONFIG = {
-    "dbname": "costco_db",
-    "user": "postgres",
-    "password": "9314110690",
-    "host": "localhost",   # or your DB server IP
-    "port": "5432"
+    "dbname": os.getenv("DB_NAME", "costco_db"),
+    "user": os.getenv("DB_USER", "postgres"),
+    "password": os.getenv("DB_PASSWORD", ""),
+    "host": os.getenv("DB_HOST", "localhost"),
+    "port": os.getenv("DB_PORT", "5432")
 }
+
 
 # Ensure DB setup
 def init_db():
@@ -142,3 +145,4 @@ def get_products(limit: int = 20):
         {"name": r[0], "item_number": r[1], "price": r[2], "image_url": r[3], "url": r[4]}
         for r in rows
     ]
+
